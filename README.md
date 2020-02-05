@@ -1,7 +1,7 @@
 # Haskies
 Resources for a Haskell mini-course. A somewhat simpler language is used to
-explain things. This is done in the belief that `Functor`, `Monad`, and
-`Currying` are super obscure and obnoxious.
+explain things. This is done in the belief that terms like `Functor`, `Monad`,
+and `Currying` do more harm than good.
 
 * [Week 1](https://github.com/korreman/haskies/blob/master/w1.md) - Functions
   and expressions
