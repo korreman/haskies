@@ -74,6 +74,15 @@ someFunc = f . g . h
 ```
 Notice that no arguments are given.
 
+Now we can rewrite `primeSquareSum` in what is rather unintuitively called
+"points-free composition":
+```
+primeSquareSum = sum . map (^2) . filter isPrime
+```
+Again, no arguments are given to this function.
+Some arguments are provided to `map` and `filter`, but the results are both
+functions that can then be composed with `(.)`.
+
 Reverse composition - `(>>>)`
 -----------------------------
 Can be used with `import Control.Arrow ((>>>))`.
@@ -86,3 +95,8 @@ g >>> f = \ x -> f (g h)
 It's a bit more intuitive to understand, as we naturally read in a left-to-right
 fashion. If you had a hard time understanding `(.)`, try to look at the
 explanations of that, but with the definition for `(>>>)`.
+
+If we want to rewrite `primeSquareSum` in this style, it is done like so:
+```
+primeSquareSum = filter isPrime >>> map (^2) >>> sum
+```
