@@ -4,6 +4,13 @@ import Text.Read (readMaybe)
 import Data.Maybe (fromMaybe)
 import System.Random (randomRIO)
 
+-- Applies the predicate to inner values.
+-- If the result is true, does nothing.
+-- If the result is false, replaces with empty.
+--
+-- For lists, this is equivalent to filter.
+-- For @Maybe@, this will replace the value with @Nothing@ if the predicate
+-- doesn't hold.
 validate :: (Alternative t, Monad t) => (a -> Bool) -> t a -> t a
 validate p x = x >>= \v -> if p v then pure v else empty
 
