@@ -86,17 +86,15 @@ you will see that nothing has changed.
 
 Input
 -----
-Actions can also read values. For example:
+Actions can also read values. However, *you cannot extract values from the IO
+context, ever*. For example:
 ```
 getLine :: IO String
 ```
-This will read one line from standard input and return it. However, you cannot
-extract it from the `IO` context. This is because the value doesn't exist until
-you run the program.
+This will read one line from standard input and return it. You cannot simply
+convert it to a `String`. So what do we do instead?
 
-So what do we do instead?
-
-First, we can apply functions to the value with `(<$>)`:
+The answer is that we apply functions to the value inside with `(<$>)`:
 ```
 (<$>) :: (a -> b) -> IO a -> IO b
 ```
