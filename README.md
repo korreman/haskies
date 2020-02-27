@@ -5,6 +5,7 @@ and `Currying` do more harm than good.
 
 * [Week 1](https://github.com/korreman/haskies/blob/master/w1.md) - Functions
   and expressions
+* [Week 2](https://github.com/korreman/haskies/blob/master/w2.md) - IO
 
 Eventual topics:
 * Lists
