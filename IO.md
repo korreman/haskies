@@ -61,16 +61,11 @@ main = print (13, 17)
 
 If we want to combine multiple IO actions, we can do so with various operators.
 These operators combine the actions, resulting in new IO actions that can be
-combined once again. To combine outputs, the operators `(<*)` and `(*>)` will
-suffice:
+combined once again. To combine outputs, the operator `(*>)` can be used:
 ```
 (*>) :: IO () -> IO () -> IO ()
-(<*) :: IO () -> IO () -> IO ()
 ```
-These combine two actions, performing them from left to right. Note that the
-direction of the arrow *does not* affect the order of actions. The arrow points
-to the result to keep, throwing the other result away. Pure output actions
-always result in `()`, so you can use either arrow. An example:
+This combine two actions, performing left one first. An example:
 ```
 name   = "Xavier"
 age    = 27
@@ -81,8 +76,7 @@ main =
   putStr "Age: " *> print age *>
   putStr "Height: " *> print height
 ```
-Try flipping all the arrows so they point left. When running the new program,
-you will see that nothing has changed.
+Try running the above code.
 
 Input
 -----
