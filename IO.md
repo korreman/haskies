@@ -63,7 +63,7 @@ If we want to combine multiple IO actions, we can do so with various operators.
 These operators combine the actions, resulting in new IO actions that can be
 combined once again. To combine outputs, the operator `(*>)` can be used:
 ```
-(*>) :: IO () -> IO () -> IO ()
+(*>) :: IO a -> IO b -> IO b
 ```
 This combine two actions, performing left one first. An example:
 ```
@@ -145,6 +145,31 @@ Our program written with the new operator:
 ```
 main = getLine >>= putStrLn
 ```
+
+`(*>)` revisited
+----------------
+We previously showed how to use `(*>)` to combine actions, but before we used
+actions with results. When both combined actions have a result that isn't `()`,
+the left result will be thrown out.
+
+For example:
+```
+getLine *> getLine :: IO String
+```
+This will read a line, throw it out, then read another line and return this
+instead.
+
+You can use it to deliberately throw out input, or to perform `IO ()` actions
+alongside actions with results. Example:
+```
+putStr "Hello, what is your name ?" *> getLine :: IO String
+```
+This will print the message, then retrieve the name from input.
+
+There is also another operator, `(<*)`. This simply throws out the result of
+the righthand action instead. *This does NOT reverse the order of operations!
+Actions are still performed from left to right.* You can think of it this way:
+The arrow points to the result we wish to keep.
 
 Putting it together
 -------------------
